@@ -1,0 +1,39 @@
+{
+  "name": "node_chat",
+  "version": "1.0.0",
+  "description": "Realtime chat app with websockets using Node.js, Express and Socket.io with Vanilla JS on the frontend with a custom UI [![Run on Repl.it](https://repl.it/badge/github/bradtraversy/chatcord)](https://repl.it/github/bradtraversy/chatcord) ## Usage ``` npm install npm run dev",
+  "main": "db/connect.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon db/connect.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AhmadRaid/Chat_Application.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AhmadRaid/Chat_Application/issues"
+  },
+  "homepage": "https://github.com/AhmadRaid/Chat_Application#readme",
+  "dependencies": {
+    "@types/express": "^4.17.17",
+    "@types/multer": "^1.4.7",
+    "@types/socket.io": "^3.0.2",
+    "@types/typescript": "^2.0.0",
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.2.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.22",
+    "socket.io": "^4.6.1",
+    "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0"
+  }
+}
