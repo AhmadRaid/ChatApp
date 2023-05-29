@@ -20,7 +20,6 @@ export const getAllUser = async (data: IUser) => {
 export const addUser = async (data: IUser) => {
   const { name, email, password } = data;
   try {
-    //  const salt = await bcrypt.genSalt();
     const hashedPassword = bcrypt.hashSync(password, 10);
 
     const user = await User.create({
@@ -37,14 +36,45 @@ export const addUser = async (data: IUser) => {
 };
 
 export const sendFriendRequest = async (data: IFriendRequest) => {
-  const { sender, recipient, status } = data;
+  const { id, senderId, recipientId, status } = data;
   try {
-   const frientRequest = friendRequest.create({
-      sender,
-      recipient,
+    const Friend_Request = await friendRequest.create({
+      senderId,
+      recipientId,
       status,
     });
-    return { code: 0, message: "commonSuccess.message", data: { frientRequest } };
+    return {
+      code: 0,
+      message: "commonSuccess.message",
+      data: { Friend_Request },
+    };
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error);
+  }
+};
+
+export const updateFriendRequest = async (
+  id: string,
+  updateData: Partial<IFriendRequest>
+) => {
+  const { senderId, recipientId, status } = updateData;
+  try {
+    const Friend_Request = await friendRequest.findOne({ id });
+
+    if (!Friend_Request) {
+      return { code: 1, message: "Friend request exist", data: null };
+    }
+
+    Friend_Request.senderId = senderId;
+    Friend_Request.recipientId = recipientId;
+    Friend_Request.status = status === "accepted" ? "accepted" : "rejected";
+    await Friend_Request.save();
+    return {
+      code: 0,
+      message: "update Friend Request Successfully",
+      data: Friend_Request,
+    };
   } catch (error: any) {
     console.log(error);
     throw new Error(error);

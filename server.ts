@@ -6,7 +6,6 @@ import { createServer } from "http";
 
 import { Request, Response, NextFunction } from "express";
 import { handleSuccess } from "./utils/response/success";
-//import { handleError }  from "./utils/response/error";
 require("dotenv").config();
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -14,15 +13,30 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3000;
 
-const httpServer = createServer();
-// const io = new Server(httpServer, {
-//   cors: {
-//     origin: "http://localhost:3000",
-//     methods: ["GET", "POST"],
-//   },
-// });
+const http = require("http");
 
-import "./utils/socket_io";
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3001",
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
+
+  socket.on("send_message", (data) => {
+    socket.emit("receive_message", data);
+  });
+  socket.on("disconnect", () => {
+    console.log("User Disconnected", socket.id);
+  });
+});
+
+//import "./utils/socket_io";
 
 app.use("/api", mainRoute);
 

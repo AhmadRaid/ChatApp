@@ -1,9 +1,10 @@
 import { Message } from "../../models";
 import { IMessage } from "../../models/interfaces/messages";
+import { Document, Types } from "mongoose";
 
-export const getAllMessages = async (data: IMessage) => {
+export const getMessages = async (senderId: string, recipientId: string) => {
   try {
-    let message = await Message.find({});
+    let message = await Message.find({ senderId , recipientId });
     if (!message) {
       return { code: 1, message: "We dont have Message", data: null };
     }
@@ -15,11 +16,11 @@ export const getAllMessages = async (data: IMessage) => {
 };
 
 export const addMessage = async (data: IMessage) => {
-  const { sender, recipient, content } = data;
+  const { senderId, recipientId, content } = data;
   try {
     const message = await Message.create({
-      sender,
-      recipient,
+      senderId,
+      recipientId,
       content,
     });
 

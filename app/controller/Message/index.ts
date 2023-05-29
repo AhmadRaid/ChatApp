@@ -14,9 +14,10 @@ export const getAllMessages = async (
   next: NextFunction
 ) => {
   try {
-    const { message, data, code } = await messageController.getAllMessages({
-      ...req.body,
-    });
+    const { message, data, code } = await messageController.getMessages(
+      req.params.senderId,
+      req.params.recipientId
+    );
 
     if (code === 0) {
       return next(new Success(message, data));

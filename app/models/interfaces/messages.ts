@@ -1,8 +1,8 @@
 import { Document, Types } from "mongoose";
 
 export interface IMessage extends Document {
-  sender: Types.ObjectId;
-  recipient: Types.ObjectId;
+  senderId: Types.ObjectId | undefined;
+  recipientId: Types.ObjectId | undefined;
   content: string;
   timestamp: Date;
 }

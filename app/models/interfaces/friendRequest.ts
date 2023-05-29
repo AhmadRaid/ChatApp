@@ -1,7 +1,7 @@
 import { Document, Types } from "mongoose";
 
 export interface IFriendRequest extends Document {
-  sender: Types.ObjectId;
-  recipient: Types.ObjectId;
+  senderId: Types.ObjectId | undefined;
+  recipientId: Types.ObjectId | undefined;
   status: "pending" | "accepted" | "rejected";
 }

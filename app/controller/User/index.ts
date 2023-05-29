@@ -51,22 +51,46 @@ export const addUser = async (
   }
 };
 
-export const sendFriendRequest = async (  req: Request,
+export const sendFriendRequest = async (
+  req: Request,
   res: Response,
-  next: NextFunction) => {
+  next: NextFunction
+) => {
+  try {
+    const { message, data, code } = await userController.sendFriendRequest({
+      ...req.body,
+    });
 
-    try {
-      const { message, data, code } = await userController.sendFriendRequest({
-        ...req.body,
-      });
-  
-      if (code === 0) {
-        return next(new Success(message, data));
-      }
-  
-      return next(new BadRequest(message));
-    } catch (err) {
-      console.log(err);
-      return next(new InternalServerError("Internal Server Error", req));
+    if (code === 0) {
+      return next(new Success(message, data));
     }
-  };
+
+    return next(new BadRequest(message));
+  } catch (err) {
+    console.log(err);
+    return next(new InternalServerError("Internal Server Error", req));
+  }
+};
+
+export const updateFriendRequest = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { message, data, code } = await userController.updateFriendRequest(req.params.id,
+      {
+        ...req.body,
+      }
+    );
+
+    if (code === 0) {
+      return next(new Success(message, data));
+    }
+
+    return next(new BadRequest(message));
+  } catch (err) {
+    console.log(err);
+    return next(new InternalServerError("Internal Server Error", req));
+  }
+};
