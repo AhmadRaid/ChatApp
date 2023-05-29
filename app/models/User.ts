@@ -13,6 +13,8 @@ const userSchema: Schema<IUser> = new Schema({
   },
   password: { type: String, required: true, select: false },
 
+  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+
   isDeleted: {
     type: Boolean,
     default: false,
@@ -20,7 +22,7 @@ const userSchema: Schema<IUser> = new Schema({
 });
 
 userSchema.methods.correctPassword = async function (
-   this: IUser,
+  this: IUser,
   candidatePassword: string,
   userPassword: string
 ): Promise<boolean> {
