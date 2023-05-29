@@ -1,7 +1,7 @@
 import { Document, Types } from "mongoose";
 
-export interface Ifriendrequest extends Document {
+export interface Imessages extends Document {
   sender: Types.ObjectId;
   recipient: Types.ObjectId;
-  status: "pending" | "accepted" | "rejected";
+  content: string;
 }
