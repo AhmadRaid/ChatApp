@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document, Model, Types } from "mongoose";
-import { Ifriendrequest } from "./interfaces/friendRequest";
+import { IFriendRequest } from "./interfaces/friendRequest";
 
-const friendRequestSchema: Schema<Ifriendrequest> = new Schema({
+const friendRequestSchema: Schema<IFriendRequest> = new Schema({
   sender: { type: Schema.Types.ObjectId, ref: "User", required: true },
   recipient: { type: Schema.Types.ObjectId, ref: "User", required: true },
   status: {
@@ -11,4 +11,7 @@ const friendRequestSchema: Schema<Ifriendrequest> = new Schema({
   },
 });
 
-export const User: Model<Ifriendrequest> = mongoose.model("User", friendRequestSchema);
+export const friendRequest: Model<IFriendRequest> = mongoose.model(
+  "Frient_Request",
+  friendRequestSchema
+);

@@ -1,6 +1,8 @@
 import { User } from "../../models";
 import bcrypt from "bcrypt";
 import { IUser } from "../../models/interfaces/user";
+import { friendRequest } from "../../models";
+import { IFriendRequest } from "../../models/interfaces/friendRequest";
 
 export const getAllUser = async (data: IUser) => {
   try {
@@ -28,6 +30,21 @@ export const addUser = async (data: IUser) => {
     });
 
     return { code: 0, message: "commonSuccess.message", data: { user } };
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error);
+  }
+};
+
+export const sendFriendRequest = async (data: IFriendRequest) => {
+  const { sender, recipient, status } = data;
+  try {
+   const frientRequest = friendRequest.create({
+      sender,
+      recipient,
+      status,
+    });
+    return { code: 0, message: "commonSuccess.message", data: { frientRequest } };
   } catch (error: any) {
     console.log(error);
     throw new Error(error);
