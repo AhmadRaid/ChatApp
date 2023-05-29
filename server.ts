@@ -1,6 +1,8 @@
 import express, { Application } from "express";
 const app: Application = express();
 import mainRoute from "./routes/mainRoute";
+import { Server, Socket } from "socket.io";
+import { createServer } from "http";
 
 import { Request, Response, NextFunction } from "express";
 import { handleSuccess } from "./utils/response/success";
@@ -11,6 +13,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3000;
+
+const httpServer = createServer();
+// const io = new Server(httpServer, {
+//   cors: {
+//     origin: "http://localhost:3000",
+//     methods: ["GET", "POST"],
+//   },
+// });
+
+import "./utils/socket_io";
 
 app.use("/api", mainRoute);
 
