@@ -65,9 +65,9 @@ export const getMyFriends = async (
   next: NextFunction
 ) => {
   try {
-    const { message, data, code } = await userController.getMyFriends(
-      req.user._id
-    );
+    let senderId = req.user._id;
+
+    const { message, data, code } = await userController.getMyFriends(senderId);
 
     if (code === 0) {
       return next(new Success(message, data));

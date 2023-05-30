@@ -32,13 +32,13 @@ export const showProfile = async (userId: string) => {
   }
 };
 
-export const getMyFriends = async (userId: string) => {
+export const getMyFriends = async (senderId: string) => {
   try {
-    let user = await User.findOne({ _id: userId }).populate("friends");
+    let user = await User.find({}).populate("friends");
     if (!user) {
       return { code: 1, message: "We dont have User", data: null };
     }
-    return { code: 0, message: "commonSuccess.message", data: user.friends };
+    return { code: 0, message: "commonSuccess.message", data: user };
   } catch (error: any) {
     console.log(error);
     throw new Error(error);
@@ -46,7 +46,6 @@ export const getMyFriends = async (userId: string) => {
 };
 export const searchUser = async (name: string) => {
   try {
-    
     const pipeline: any[] = [
       { $match: { name: { $regex: `^${name}`, $options: "i" } } },
       { $project: { _id: 0, password: 0 } },
@@ -67,6 +66,14 @@ export const addUser = async (data: IUser) => {
   const { name, email, password } = data;
   try {
     const hashedPassword = bcrypt.hashSync(password, 10);
+
+    const userExist = await User.findOne({
+      email,
+    });
+
+    if (userExist) {
+      return { code: 1, message: "user exist", data: null };
+    }
 
     const user = await User.create({
       name,
