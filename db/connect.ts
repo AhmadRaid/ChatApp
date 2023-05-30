@@ -11,7 +11,7 @@ mongoose.set("strictQuery", false);
 
 const connectDB = async () => {
   await mongoose
-    .connect(process.env.mongoUrl, connectionParams)
+    .connect("mongodb+srv://user:3EF7EZaFvv4Sz3gM@cluster0.qmgxzwy.mongodb.net/ChatApp?retryWrites=true&w=majority", connectionParams)
     .then(() => {
       console.log("MongoDB Connected");
     })
