@@ -23,7 +23,9 @@ export const signUp = async (
       return next(new Success(message, data));
     }
 
-    return next(new BadRequest(message));
+    //return next(new BadRequest(message));
+    res.status(400).json({ Error: message });
+
   } catch (err) {
     console.log(err);
     return next(new InternalServerError("Internal Server Error", req));
@@ -44,7 +46,9 @@ export const login = async (
       return next(new Success(message, data));
     }
 
-    return next(new BadRequest(message));
+   // return next(new BadRequest(message));
+   res.status(400).json({ Error: message });
+
   } catch (err) {
     console.log(err);
     return next(new InternalServerError("Internal Server Error", req));

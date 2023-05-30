@@ -11,32 +11,32 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const PORT = process.env.PORT || 3000;
-
-const http = require("http");
-
-const server = http.createServer(app);
-
+const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3001",
-    methods: ["GET", "POST"],
+    origin: "http://localhost:3000",
   },
 });
 
 io.on("connection", (socket) => {
-  console.log(`User Connected: ${socket.id}`);
+  console.log(`A user Connected: ${socket.id}`);
 
+  socket.broadcast.emit("hello", "world");
 
   socket.on("send_message", (data) => {
+    console.log(data);
     socket.emit("receive_message", data);
   });
+
   socket.on("disconnect", () => {
     console.log("User Disconnected", socket.id);
   });
+  
 });
 
-//import "./utils/socket_io";
+app.use("/chat", (req: Request, res: Response) => {
+  res.status(404).send("Chat Page");
+});
 
 app.use("/api", mainRoute);
 
@@ -55,4 +55,4 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   return handleSuccess(error, req, res);
 });
 
-export default app;
+export { server, app };

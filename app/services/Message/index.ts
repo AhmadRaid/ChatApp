@@ -15,7 +15,7 @@ export const getMessages = async (senderId: string, recipientId: string) => {
   }
 };
 
-export const addMessage = async (data: IMessage) => {
+export const sendMessage = async (data: IMessage) => {
   const { senderId, recipientId, content } = data;
   try {
     const message = await Message.create({

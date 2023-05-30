@@ -2,8 +2,8 @@ import express, { Router } from "express";
 import { Request, Response, NextFunction } from "express";
 import * as controller from "../../../app/controller/User";
 
-import isAuth, { IUserRequest } from "../../../Middleware/isAuth";
 const router: Router = express.Router();
+import isAuth, { IUserRequest } from "../../../Middleware/isAuth";
 
 router.use((req: Request, res: Response, next: NextFunction) => {
   isAuth(req as IUserRequest, res, next).catch(next);

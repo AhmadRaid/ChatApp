@@ -44,7 +44,7 @@ export const signUp = async (data: any) => {
   try {
     const isUsedEmail = await User.findOne({ email });
     if (isUsedEmail) {
-      return { code: 2, message: "user.usedEmail", data: null };
+      return { code: 2, message: "Email is Used", data: null };
     }
     const hashedPassword = bcrypt.hashSync(password, 10);
     const user = await User.create({

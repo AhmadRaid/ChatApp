@@ -23,20 +23,27 @@ export const getAllMessages = async (
       return next(new Success(message, data));
     }
 
-    return next(new BadRequest(message));
+    //return next(new BadRequest(message));
+    res.status(400).json({ Error: message });
+
   } catch (err) {
     console.log(err);
     return next(new InternalServerError("Internal Server Error", req));
   }
 };
 
-export const addMessage = async (
-  req: Request,
+export const sendMessage = async (
+  req: any,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const { message, data, code } = await messageController.addMessage({
+    let senderId = req.user._id;
+    console.log(req.user._id);
+    
+
+    const { message, data, code } = await messageController.sendMessage({
+      senderId,
       ...req.body,
     });
 
@@ -44,7 +51,9 @@ export const addMessage = async (
       return next(new Success(message, data));
     }
 
-    return next(new BadRequest(message));
+    //return next(new BadRequest(message));
+    res.status(400).json({ Error: message });
+
   } catch (err) {
     console.log(err);
     return next(new InternalServerError("Internal Server Error", req));

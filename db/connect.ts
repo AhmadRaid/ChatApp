@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-import app from "../server";
+import {server} from "../server";
 require("dotenv").config();
 
 const connectionParams = {
@@ -21,9 +21,9 @@ const connectDB = async () => {
 };
 connectDB();
 
-app
-  .listen(3000, () => {
-    console.log(`Server is running on localhost:3000`);
+server
+  .listen(3001, () => {
+    console.log(`Server is running on localhost:3001`);
   })
   .on("error", (err) => {
     console.log(err);
