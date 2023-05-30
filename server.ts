@@ -31,7 +31,6 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("User Disconnected", socket.id);
   });
-  
 });
 
 app.use("/chat", (req: Request, res: Response) => {
