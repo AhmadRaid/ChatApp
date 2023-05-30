@@ -1,4 +1,4 @@
-export class GeneralError extends Error {
+export class AhmadError extends Error {
   statusCode: number;
   data: any;
 
