@@ -34,7 +34,7 @@ export const showProfile = async (userId: string) => {
 
 export const getMyFriends = async (senderId: string) => {
   try {
-    let user = await User.find({}).populate("friends");
+    let user = await User.find({ _id: senderId }).populate("friends");
     if (!user) {
       return { code: 1, message: "We dont have User", data: null };
     }
