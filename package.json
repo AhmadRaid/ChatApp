@@ -33,6 +33,7 @@
     "socket.io": "^4.6.1",
     "socket.io-client": "^4.6.1",
     "supertest": "^6.3.3",
+    "ts-node": "^10.9.1",
     "typescript": "^5.0.4",
     "uWebSockets.js": "github:uNetworking/uWebSockets.js#v20.4.0"
   },
