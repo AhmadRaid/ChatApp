@@ -7,7 +7,7 @@ export function createAccessToken(object : object) {
       data: object,
       exp: Math.floor(Date.now() / 1000) + 250 * 60 * 60 * 60 * 24,
     },
-    process.env.JWT_SECRET_ACCESS_Token_KEY
+    "Ahmad_Raid_Secret_Token_key"
   );
   return token;
 }
@@ -18,7 +18,7 @@ export function createRefreshToken(object: object) {
       data: object,
       exp: Math.floor(Date.now() / 1000) + 280 * 60 * 60 * 60 * 60 * 24 * 30,
     },
-    process.env.JWT_SECRET_REFRESH_Token_KEY
+    "Ahmad_Raid_Secret_Refresh_Token_key"
   );
   return token;
 }
@@ -47,10 +47,10 @@ export function create_Tokens_with_cookie(object: object) {
 }
 
 export function verifyAccessToken(token : string) {
-  return JWT.verify(token, process.env.JWT_SECRET_ACCESS_Token_KEY);
+  return JWT.verify(token, "JWT_SECRET_ACCESS_Token_KEY");
 }
 
 export function verifyRefreshToken(token: string) {
-  return JWT.verify(token, process.env.JWT_SECRET_REFRESH_Token_KEY);
+  return JWT.verify(token, "Ahmad_Raid_Secret_Refresh_Token_key");
 }
 
