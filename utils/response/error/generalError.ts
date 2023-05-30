@@ -8,8 +8,3 @@ export class GeneralError extends Error {
     this.data = data;
   }
 }
-
-/**
- *
- * @type {{GeneralError: typeof GeneralError}}
- */

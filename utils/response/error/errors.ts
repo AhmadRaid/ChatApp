@@ -8,7 +8,7 @@ import {
   ACCESS_DENIED,
 } from "../../httpCode";
 
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from "express";
 
 export class BadRequest extends GeneralError {
   constructor(message: string, data: any = undefined) {
