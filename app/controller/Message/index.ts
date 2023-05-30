@@ -9,13 +9,14 @@ import {
 } from "../../../utils/response/error/errors";
 
 export const getAllMessages = async (
-  req: Request,
+  req: any,
   res: Response,
   next: NextFunction
 ) => {
   try {
+    let senderId = req.user._id;
     const { message, data, code } = await messageController.getMessages(
-      req.params.senderId,
+      senderId,
       req.params.recipientId
     );
 
@@ -39,7 +40,6 @@ export const sendMessage = async (
 ) => {
   try {
     let senderId = req.user._id;
-    console.log(req.user._id);
     
 
     const { message, data, code } = await messageController.sendMessage({
