@@ -39,9 +39,9 @@ app.use("/chat", (req: Request, res: Response) => {
 
 app.use("/api", mainRoute);
 
-app.use("*", (req: Request, res: Response) =>
-  res.status(404).send("NOT FOUND PAGE Ahmad Raid")
-);
+// app.use("*", (req: Request, res: Response) =>
+//   res.status(404).send("NOT FOUND PAGE Ahmad Raid")
+// );
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   res.setHeader("Content-Type", "application/json");

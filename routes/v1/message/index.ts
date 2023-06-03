@@ -9,8 +9,7 @@ import isAuth, { IUserRequest } from "../../../Middleware/isAuth";
 router.use((req: Request, res: Response, next: NextFunction) => {
   isAuth(req as IUserRequest, res, next).catch(next);
 });
-router.get("/get-messages/:recipientId", controller.getAllMessages);
-
+router.get("/get-messages/:recipientId", controller.getAllMessages); 
 
 router.post("/send-meesage", controller.sendMessage);
 
