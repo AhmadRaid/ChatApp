@@ -23,9 +23,8 @@ io.on("connection", (socket) => {
 
   socket.broadcast.emit("hello", "world");
 
-  socket.on("send_message", (data_text) => {
-    let dataJson = JSON.parse(data_text)
-    socket.to(dataJson.recipientId).emit("receive_message", dataJson);
+  socket.on("send_message", (data) => {
+    socket.emit("receive_message", data);
   });
 
   socket.on("disconnect", () => {
