@@ -16,14 +16,14 @@ const connectDB = async () => {
       console.log("MongoDB Connected");
     })
     .catch((err: any) => {
-      console.error(`Error connecting to the database. n${err}`);
+      console.error(`Error connecting to the database. ${err}`);
     });
 };
 connectDB();
 
 server
-  .listen(3001, () => {
-    console.log(`Server is running on localhost:3001`);
+  .listen(3000, () => {
+    console.log(`Server is running on localhost:3000`);
   })
   .on("error", (err) => {
     console.log(err);

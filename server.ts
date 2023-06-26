@@ -3,7 +3,7 @@ const app: Application = express();
 import mainRoute from "./routes/mainRoute";
 import { Server, Socket } from "socket.io";
 import { createServer } from "http";
-
+//import  { } from "./app/controller/";
 import { Request, Response, NextFunction } from "express";
 import { handleSuccess } from "./utils/response/success";
 require("dotenv").config();
@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "http://localhost:3001",
   },
 });
 
@@ -24,8 +24,7 @@ io.on("connection", (socket) => {
   socket.broadcast.emit("hello", "world");
 
   socket.on("send_message", (data) => {
-    console.log(data);
-    socket.emit("receive_message", data);
+    socket.emit("receive_message", JSON.parse(data));
   });
 
   socket.on("disconnect", () => {
@@ -39,9 +38,9 @@ app.use("/chat", (req: Request, res: Response) => {
 
 app.use("/api", mainRoute);
 
-// app.use("*", (req: Request, res: Response) =>
-//   res.status(404).send("NOT FOUND PAGE Ahmad Raid")
-// );
+app.use("*", (req: Request, res: Response) =>
+  res.status(404).send("NOT FOUND PAGE Ahmad Raid")
+);
 
 app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   res.setHeader("Content-Type", "application/json");
