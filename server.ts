@@ -18,17 +18,63 @@ const io = new Server(server, {
   },
 });
 
+interface User {
+  userId: string;
+  socketId: string;
+}
+
+let users: Map<String,User> = new Map();
+
+const addUser = (userId: string, socketId: string) => {
+  if (!users.has(userId)) {
+    users.set(userId, { userId, socketId });
+  }
+};
+
+const removeUser = (socketId: string) => {
+  for (const [userId, user] of users) {
+    if (user.socketId === socketId) {
+      users.delete(userId);
+      break;
+    }
+  }
+};
+
+const getUser = (userId: string) => {
+  return users.get(userId);
+};
+
 io.on("connection", (socket) => {
   console.log(`A user Connected: ${socket.id}`);
 
-  socket.broadcast.emit("hello", "world");
+  socket.on("addUser", (userId) => {
+    addUser(userId, socket.id);
+    console.log(users);
+  });
 
-  socket.on("send_message", (data) => {
-    socket.emit("receive_message", data);
+
+  socket.on("send_message", (dataMessage) => {
+    const { senderId, receiverId, message, date } = dataMessage
+
+    const user = getUser(receiverId);
+console.log(user);
+
+    if (user) {
+      io.to(user.socketId).emit("receive_message", {
+        senderId,
+        message,
+        date
+      });
+    }else{
+      console.log('sdad');
+      
+    }
   });
 
   socket.on("disconnect", () => {
     console.log("User Disconnected", socket.id);
+    removeUser(socket.id);
+
   });
 });
 
