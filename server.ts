@@ -47,11 +47,11 @@ const getUser = (userId: string) => {
 io.on("connection", (socket) => {
   console.log(`A user Connected: ${socket.id}`);
 
-  socket.on("addUser", (userId) => {
+  const userId = socket.handshake.query.userId;
+  
+  if (typeof userId === 'string') {
     addUser(userId, socket.id);
-    console.log(users);
-  });
-
+  }
 
   socket.on("send_message", (dataMessage) => {
     const { senderId, receiverId, message, date } = dataMessage
