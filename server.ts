@@ -3,6 +3,7 @@ const app: Application = express();
 import mainRoute from "./routes/mainRoute";
 import { Server, Socket } from "socket.io";
 import { createServer } from "http";
+const cors = require('cors');
 //import  { } from "./app/controller/";
 import { Request, Response, NextFunction } from "express";
 import { handleSuccess } from "./utils/response/success";
@@ -10,6 +11,7 @@ require("dotenv").config();
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
 const server = createServer(app);
 const io = new Server(server, {
