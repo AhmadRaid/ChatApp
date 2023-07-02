@@ -45,6 +45,8 @@ export const getMyFriends = async (senderId: string) => {
   }
 };
 export const searchUser = async (name: string) => {
+  console.log(name);
+  
   try {
     const pipeline: any[] = [
       { $match: { name: { $regex: `^${name}`, $options: "i" } } },

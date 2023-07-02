@@ -152,13 +152,13 @@ export const changeStatusFriendRequest = async (
 };
 
 export const searchUser = async (
-  req: Request,
+  req: any,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const { message, data, code } = await userController.searchUser(
-      req.params.name
+      req.query.search
     );
 
     if (code === 0) {

@@ -17,6 +17,6 @@ router.patch(
   "/change-status-friend-request",
   controller.changeStatusFriendRequest
 );
-router.get("/search-user/:name", controller.searchUser);
+router.get("/search-user", controller.searchUser);
 
 export default router;
