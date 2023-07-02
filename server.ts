@@ -43,6 +43,7 @@ const removeUser = (socketId: string) => {
 };
 
 const getUser = (userId: string) => {
+  
   return users.get(userId);
 };
 
@@ -51,14 +52,18 @@ io.on("connection", (socket) => {
 
   const userId = socket.handshake.query.userId;
   
+  
   if (typeof userId === 'string') {
     addUser(userId, socket.id);
+  }else{
+    console.log(`userId not string`);
+
   }
 
   socket.on("send_message", (dataMessage) => {
-    const { senderId, recipientId, message, date } = dataMessage
+    const { senderId, receiverId, message, date } = dataMessage
 
-    const user = getUser(recipientId);
+    const user = getUser(receiverId);
 console.log(user);
 
     if (user) {
