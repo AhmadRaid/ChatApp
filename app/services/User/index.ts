@@ -5,13 +5,13 @@ import { friendRequest } from "../../models";
 import { IFriendRequest } from "../../models/interfaces/friendRequest";
 import { Types } from "mongoose";
 
-export const getAllUser = async (data: IUser) => {
+export const getAllUser = async () => {
   try {
     let user = await User.find({});
     if (!user) {
       return { code: 1, message: "We dont have User", data: null };
     }
-    return { code: 0, message: "commonSuccess.message", data: { user } };
+    return { code: 0, message: "commonSuccess.message", data:  user  };
   } catch (error: any) {
     console.log(error);
     throw new Error(error);
@@ -34,7 +34,7 @@ export const showProfile = async (userId: string) => {
 
 export const getMyFriends = async (senderId: string) => {
   try {
-    let user = await User.find({ _id: senderId }).populate("friends");
+    let user = await User.findOne({ _id: senderId }).populate("friends").select('-_id -name -email -isDeleted');
     if (!user) {
       return { code: 1, message: "We dont have User", data: null };
     }

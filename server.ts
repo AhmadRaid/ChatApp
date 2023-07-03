@@ -69,6 +69,7 @@ console.log(user);
     if (user) {
       io.to(user.socketId).emit("receive_message", {
         senderId,
+        receiverId,
         message,
         date
       });

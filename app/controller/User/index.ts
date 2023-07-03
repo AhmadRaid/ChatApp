@@ -21,9 +21,7 @@ export const getAllUser = async (
   next: NextFunction
 ) => {
   try {
-    const { message, data, code } = await userController.getAllUser({
-      ...req.body,
-    });
+    const { message, data, code } = await userController.getAllUser();
 
     if (code === 0) {
       return next(new Success(message, data));

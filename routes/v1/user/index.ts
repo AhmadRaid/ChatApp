@@ -9,7 +9,7 @@ router.use((req: Request, res: Response, next: NextFunction) => {
   isAuth(req as IUserRequest, res, next).catch(next);
 });
 
-router.post("/listing", controller.getAllUser);
+router.get("/listing", controller.getAllUser);
 router.get("/show-profile/:userId", controller.showProfile);
 router.get("/get-my-friend", controller.getMyFriends);
 router.post("/send-friend-request", controller.sendFriendRequest);
