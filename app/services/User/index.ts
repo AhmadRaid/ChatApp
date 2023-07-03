@@ -57,7 +57,7 @@ export const searchUser = async (name: string) => {
     if (!user) {
       return { code: 1, message: "We dont have User", data: null };
     }
-    return { code: 0, message: "commonSuccess.message", data: { user } };
+    return { code: 0, message: "commonSuccess.message", data: user  };
   } catch (error: any) {
     console.log(error);
     throw new Error(error);

@@ -102,7 +102,7 @@ app.use((error: any, req: Request, res: Response, next: NextFunction) => {
   res.setHeader("X-Frame-Options", "SAMEORIGIN");
   if (error instanceof Error) {
     console.log("Global Error", error);
-    res.status(500).json(error);
+   return res.status(500).json(error);
   }
   return handleSuccess(error, req, res);
 });
