@@ -18,7 +18,7 @@ export const login = async (data: any) => {
     if (!user || !(await user.correctPassword(password, user.password))) {
       return {
         code: 2,
-        message: "user.incorrectEmail_OR_Password",
+        message: "user.incorrectEmail_OR_Passsword",
         data: null,
       };
     }
@@ -29,7 +29,7 @@ export const login = async (data: any) => {
 
     return {
       code: 0,
-      message: "commonSuccess.message",
+      message: "commonSuccess",
       data: { token, user },
     };
   } catch (error: any) {
