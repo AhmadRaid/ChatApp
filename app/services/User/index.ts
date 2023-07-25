@@ -45,9 +45,9 @@ export const getMyFriends = async (senderId: string) => {
   }
 };
 export const searchUser = async (name: string) => {
-  console.log(name);
   
   try {
+    if(name.length>0){
     const pipeline: any[] = [
       { $match: { name: { $regex: `^${name}`, $options: "i" } } },
       { $project: { _id: 0, password: 0 } },
@@ -58,6 +58,9 @@ export const searchUser = async (name: string) => {
       return { code: 1, message: "We dont have User", data: null };
     }
     return { code: 0, message: "commonSuccess.message", data: user  };
+  }else{
+    return { code: 0, message: "We dont have User in search", data: [] };
+  }
   } catch (error: any) {
     console.log(error);
     throw new Error(error);
@@ -103,6 +106,7 @@ export const sendFriendRequest = async (data: IFriendRequest) => {
       message: "commonSuccess.message",
       data: { Friend_Request },
     };
+
   } catch (error: any) {
     console.log(error);
     throw new Error(error);
