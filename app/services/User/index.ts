@@ -50,7 +50,7 @@ export const searchUser = async (name: string) => {
     if(name.length>0){
     const pipeline: any[] = [
       { $match: { name: { $regex: `^${name}`, $options: "i" } } },
-      { $project: { _id: 0, password: 0 } },
+      { $project: { password: 0 } },
     ];
 
     let user = await User.aggregate(pipeline);
